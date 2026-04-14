@@ -9,10 +9,13 @@ class Settings(BaseSettings):
     # Database
     DATABASE_URL: str = ""
 
-    # Auth
-    JWT_SECRET_KEY: str = ""
+    # Auth — JWT_SECRET_KEY is required; empty string allows token forgery
+    JWT_SECRET_KEY: str
     JWT_ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 10080  # 7 days
+
+    # CORS
+    CORS_ORIGINS: list[str] = ["http://localhost:8081"]
 
     # Google OAuth
     GOOGLE_CLIENT_ID: str = ""
@@ -30,4 +33,5 @@ class Settings(BaseSettings):
 
 @lru_cache()
 def get_settings() -> Settings:
+    """Return cached application settings loaded from environment / .env file."""
     return Settings()

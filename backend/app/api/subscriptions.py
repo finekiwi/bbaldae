@@ -4,5 +4,5 @@ router = APIRouter()
 
 
 @router.get("/")
-async def subscriptions_stub():
+async def subscriptions_stub() -> dict[str, str]:
     return {"module": "subscriptions"}
